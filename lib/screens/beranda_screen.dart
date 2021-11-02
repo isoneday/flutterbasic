@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/screens/listmakanan_screen.dart';
+import 'package:flutter_app/screens/listwisata_screen.dart';
 import 'package:flutter_app/screens/login_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -28,12 +28,12 @@ class BerandaScreen extends StatelessWidget {
             child: Row(
               children: [
                 tampilanMenu("list", "gambar/bg2.png", Colors.blue, context,
-                    ListMakananScreen()),
+                    ListWisataScreen()),
                 SizedBox(
                   width: 10,
                 ),
                 tampilanMenu("list", "gambar/bg1.png", Colors.yellow, context,
-                    ListMakananScreen())
+                    ListWisataScreen())
               ],
             ),
           ),
@@ -41,12 +41,12 @@ class BerandaScreen extends StatelessWidget {
             child: Row(
               children: [
                 tampilanMenu("list", "gambar/bg1.png", Colors.yellow, context,
-                    ListMakananScreen()),
+                    ListWisataScreen()),
                 SizedBox(
                   width: 10,
                 ),
                 tampilanMenu("list", "gambar/bg2.png", Colors.blue, context,
-                    ListMakananScreen())
+                    ListWisataScreen())
               ],
             ),
           ),
@@ -54,9 +54,9 @@ class BerandaScreen extends StatelessWidget {
             child: Row(
               children: [
                 tampilanMenu("list", "gambar/bg1.png", Colors.blue, context,
-                    ListMakananScreen()),
+                    ListWisataScreen()),
                 tampilanMenu("list", "gambar/bg2.png", Colors.yellow, context,
-                    ListMakananScreen())
+                    ListWisataScreen())
               ],
             ),
           )
