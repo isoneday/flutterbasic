@@ -1,6 +1,10 @@
+import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
+
+import 'package:async/async.dart';
 import 'package:path/path.dart' as path;
+import 'package:http/http.dart' as http;
 import 'package:esys_flutter_share/esys_flutter_share.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -26,7 +30,11 @@ class _CameraScreenState extends State<CameraScreen> {
                 shareFile();
               },
               icon: Icon(Icons.share)),
-          IconButton(onPressed: () {}, icon: Icon(Icons.upload)),
+          IconButton(
+              onPressed: () {
+                uploadFile(_image);
+              },
+              icon: Icon(Icons.upload)),
         ],
       ),
       body: _image == null
@@ -79,7 +87,8 @@ class _CameraScreenState extends State<CameraScreen> {
 
   Future<void> getImageFromCamera() async {
     // Capture a photo
-    final XFile? photo = await _picker.pickImage(source: ImageSource.camera);
+    final XFile? photo =
+        await _picker.pickImage(source: ImageSource.camera, imageQuality: 50);
     File file = File(photo!.path);
     setState(() {
       _image = file;
@@ -106,5 +115,25 @@ class _CameraScreenState extends State<CameraScreen> {
   Future<ByteData> getByteFromFile() async {
     Uint8List bytes = File(_image!.path).readAsBytesSync() as Uint8List;
     return ByteData.view(bytes.buffer);
+  }
+
+  uploadFile(File? image) async {
+    var stream = http.ByteStream(DelegatingStream.typed(_image!.openRead()));
+    var length = await _image!.length();
+    var uri =
+        Uri.parse("http://192.168.100.69/db_makananlanjutan/uploadmakanan.php");
+    var request = http.MultipartRequest("POST", uri);
+    request.fields['vsnamamakanan'] = "nasi goreng";
+    request.fields['vsiduser'] = "117";
+    request.fields['vskategori'] = "nasi";
+    request.fields['vstimeinsert'] = "2021.10.01 at 10:25:49";
+    var multipartFile = http.MultipartFile("image", stream, length,
+        filename: path.basename(_image!.path));
+    request.files.add(multipartFile);
+    var response = await request.send();
+    print("response:" + response.statusCode.toString());
+    response.stream.transform(utf8.decoder).listen((event) {
+      print("hasil:" + event);
+    });
   }
 }
