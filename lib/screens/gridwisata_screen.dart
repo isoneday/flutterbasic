@@ -39,19 +39,17 @@ class GridWisataScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Flexible(
-                        child: Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.only(
-                                  topRight: Radius.circular(10),
-                                  bottomLeft: Radius.circular(10))),
-                          child: Image.asset(
-                            "gambar/" + wisata.gambar!,
-                            width: double.infinity,
-                            height: double.infinity,
-                            fit: BoxFit.fill,
-                          ),
+                          child: ClipRRect(
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(10),
+                            topRight: Radius.circular(10)),
+                        child: Image.asset(
+                          "gambar/" + wisata.gambar!,
+                          width: double.infinity,
+                          height: double.infinity,
+                          fit: BoxFit.fill,
                         ),
-                      ),
+                      )),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(

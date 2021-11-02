@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/screens/camera_screen.dart';
 import 'package:flutter_app/screens/gridwisata_screen.dart';
 import 'package:flutter_app/screens/listwisata_screen.dart';
 import 'package:flutter_app/screens/login_screen.dart';
@@ -41,8 +42,8 @@ class BerandaScreen extends StatelessWidget {
           Flexible(
             child: Row(
               children: [
-                tampilanMenu("list", "gambar/bg1.png", Colors.yellow, context,
-                    ListWisataScreen()),
+                tampilanMenu("Camera", "gambar/bg1.png", Colors.yellow, context,
+                    CameraScreen()),
                 SizedBox(
                   width: 10,
                 ),
