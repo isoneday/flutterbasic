@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/screens/listmakanan_screen.dart';
+import 'package:flutter_app/screens/login_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class BerandaScreen extends StatelessWidget {
   const BerandaScreen({Key? key}) : super(key: key);
@@ -9,6 +11,16 @@ class BerandaScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("Beranda"),
+        actions: [
+          IconButton(
+              onPressed: () async {
+                SharedPreferences pref = await SharedPreferences.getInstance();
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) => LoginScreen()));
+                pref.clear();
+              },
+              icon: Icon(Icons.logout))
+        ],
       ),
       body: Column(
         children: [

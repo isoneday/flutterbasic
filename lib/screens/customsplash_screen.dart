@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/screens/beranda_screen.dart';
 import 'package:flutter_app/screens/home_screen.dart';
 import 'package:flutter_app/screens/login_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CustomSplashScreen extends StatefulWidget {
   const CustomSplashScreen({Key? key}) : super(key: key);
@@ -25,9 +26,15 @@ class _CustomSplashScreenState extends State<CustomSplashScreen> {
     var duration = Duration(seconds: 4);
     return Timer(duration, () async {
       //untuk pemindahan halaman
-
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => LoginScreen()));
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      bool sesi = prefs.getBool("sesi") ?? false;
+      if (sesi) {
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => BerandaScreen()));
+      } else {
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => LoginScreen()));
+      }
     });
   }
 
