@@ -44,6 +44,7 @@ class DetailWisataScreen extends StatelessWidget {
           ),
           Text(
             detailWisata?.alamat ?? "-",
+            textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 20,
             ),

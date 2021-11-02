@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/screens/gridwisata_screen.dart';
 import 'package:flutter_app/screens/listwisata_screen.dart';
 import 'package:flutter_app/screens/login_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -27,13 +28,13 @@ class BerandaScreen extends StatelessWidget {
           Flexible(
             child: Row(
               children: [
-                tampilanMenu("list", "gambar/bg2.png", Colors.blue, context,
-                    ListWisataScreen()),
+                tampilanMenu("list wisata", "gambar/bg2.png", Colors.blue,
+                    context, ListWisataScreen()),
                 SizedBox(
                   width: 10,
                 ),
-                tampilanMenu("list", "gambar/bg1.png", Colors.yellow, context,
-                    ListWisataScreen())
+                tampilanMenu("grid wisata", "gambar/bg1.png", Colors.yellow,
+                    context, GridWisataScreen())
               ],
             ),
           ),
