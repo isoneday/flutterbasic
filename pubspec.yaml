@@ -42,6 +42,7 @@ dependencies:
   esys_flutter_share: ^1.0.2
   path_provider: 
   http: ^0.13.4
+  toast: ^0.1.5
 
 flutter_icons:
   android: "bank_kalsel"

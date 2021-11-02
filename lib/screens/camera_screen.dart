@@ -8,6 +8,7 @@ import 'package:http/http.dart' as http;
 import 'package:esys_flutter_share/esys_flutter_share.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:toast/toast.dart';
 
 class CameraScreen extends StatefulWidget {
   const CameraScreen({Key? key}) : super(key: key);
@@ -18,6 +19,7 @@ class CameraScreen extends StatefulWidget {
 
 class _CameraScreenState extends State<CameraScreen> {
   File? _image;
+  bool? loading;
   final ImagePicker _picker = ImagePicker();
   @override
   Widget build(BuildContext context) {
@@ -33,6 +35,9 @@ class _CameraScreenState extends State<CameraScreen> {
           IconButton(
               onPressed: () {
                 uploadFile(_image);
+                setState(() {
+                  loading = true;
+                });
               },
               icon: Icon(Icons.upload)),
         ],
@@ -41,10 +46,15 @@ class _CameraScreenState extends State<CameraScreen> {
           ? Center(
               child: Text("tidak ada gambar"),
             )
-          : Image.file(
-              _image!,
-              width: double.infinity,
-              fit: BoxFit.fill,
+          : Column(
+              children: [
+                Image.file(
+                  _image!,
+                  width: double.infinity,
+                  fit: BoxFit.fill,
+                ),
+                loading == true ? CircularProgressIndicator() : Container()
+              ],
             ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -133,6 +143,11 @@ class _CameraScreenState extends State<CameraScreen> {
     var response = await request.send();
     print("response:" + response.statusCode.toString());
     response.stream.transform(utf8.decoder).listen((event) {
+      setState(() {
+        loading = false;
+        Toast.show("Upload File Berhasil", context,
+            duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
+      });
       print("hasil:" + event);
     });
   }
