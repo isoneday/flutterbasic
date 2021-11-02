@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/screens/berita_screen.dart';
 import 'package:flutter_app/screens/camera_screen.dart';
 import 'package:flutter_app/screens/gridwisata_screen.dart';
 import 'package:flutter_app/screens/listwisata_screen.dart';
@@ -47,8 +48,8 @@ class BerandaScreen extends StatelessWidget {
                 SizedBox(
                   width: 10,
                 ),
-                tampilanMenu("list", "gambar/bg2.png", Colors.blue, context,
-                    ListWisataScreen())
+                tampilanMenu("Berita", "gambar/bg2.png", Colors.blue, context,
+                    BeritaScreen())
               ],
             ),
           ),
