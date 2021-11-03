@@ -15,7 +15,7 @@ class BeritaScreen extends StatefulWidget {
 
 class _BeritaScreenState extends State<BeritaScreen> {
   bool? loading;
-  List<Articles>? responseBerita;
+  List<Articles>? responseBerita = [];
   Articles? articles;
   @override
   void initState() {
@@ -54,31 +54,85 @@ class _BeritaScreenState extends State<BeritaScreen> {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10)),
                       color: Colors.blue[200],
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
+                      child: Column(
+                        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(10),
+                              topRight: Radius.circular(10),
+                            ),
+                            child: Image.network(
+                              articles?.urlToImage ??
+                                  "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png",
+                              width: double.infinity,
+                              height: 200,
+                              fit: BoxFit.fill,
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
                               articles?.title ?? "-",
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold),
                             ),
-                            CircleAvatar(
-                              radius: 40,
-                              backgroundImage: NetworkImage(
-                                articles?.urlToImage ??
-                                    "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png",
-                                // width: 50,
-                                // height: 50,
-                                // fit: BoxFit.fill,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  articles?.author ?? "-",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold),
+                                ),
                               ),
-                            )
-                          ],
-                        ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  articles?.publishedAt?.substring(0, 10) ??
+                                      "-",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ],
+                          )
+                        ],
                       ),
+                      // tampilan horizontal
+                      //  Row(
+                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //   children: [
+                      //     Flexible(
+                      //       child: Text(
+                      //         articles?.title ?? "-",
+                      //         style: TextStyle(
+                      //             color: Colors.white,
+                      //             fontSize: 10,
+                      //             fontWeight: FontWeight.bold),
+                      //       ),
+                      //     ),
+                      //     CircleAvatar(
+                      //       radius: 40,
+                      //       backgroundImage: NetworkImage(
+                      //         articles?.urlToImage ??
+                      //             "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png",
+                      //         // width: 50,
+                      //         // height: 50,
+                      //         // fit: BoxFit.fill,
+                      //       ),
+                      //     )
+                      //   ],
+                      // ),
                     ),
                     // Divider(
                     //   color: Colors.black,
@@ -102,7 +156,7 @@ class _BeritaScreenState extends State<BeritaScreen> {
       setState(() {
         loading = false;
         responseBerita =
-            berita.map<Articles>((d) => Articles.fromJson(data)).toList();
+            berita.map<Articles>((d) => Articles.fromJson(d)).toList();
         // print("data: " + responseBerita.toString());
       });
     } else {
