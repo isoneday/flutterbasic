@@ -147,7 +147,7 @@ class _BeritaScreenState extends State<BeritaScreen> {
     );
   }
 
-  getDataBerita() async {
+ Future getDataBerita() async {
     loading = true;
     var res = await http.get(Uri.parse(Api.BASE_URL));
     if (res.statusCode == 200) {
