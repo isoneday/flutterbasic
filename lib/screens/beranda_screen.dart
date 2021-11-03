@@ -5,6 +5,7 @@ import 'package:flutter_app/screens/database_screen.dart';
 import 'package:flutter_app/screens/gridwisata_screen.dart';
 import 'package:flutter_app/screens/listwisata_screen.dart';
 import 'package:flutter_app/screens/login_screen.dart';
+import 'package:flutter_app/screens/tab_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class BerandaScreen extends StatelessWidget {
@@ -59,8 +60,8 @@ class BerandaScreen extends StatelessWidget {
               children: [
                 tampilanMenu("SqliteDB", "gambar/bg1.png", Colors.blue, context,
                     DatabaseScreen()),
-                tampilanMenu("list", "gambar/bg2.png", Colors.yellow, context,
-                    ListWisataScreen())
+                tampilanMenu("Tab", "gambar/bg2.png", Colors.yellow, context,
+                    TabScreen())
               ],
             ),
           )
