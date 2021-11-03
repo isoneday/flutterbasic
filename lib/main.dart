@@ -13,6 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: CustomSplashScreen(),
+      theme: ThemeData(fontFamily: "Game Of Squids"),
     );
   }
 }

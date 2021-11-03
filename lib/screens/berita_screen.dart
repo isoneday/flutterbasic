@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/model/model_berita.dart';
 import 'package:flutter_app/network/api.dart';
+import 'package:flutter_app/screens/detailberita_screen.dart';
 import 'package:http/http.dart' as http;
 import 'package:toast/toast.dart';
 
@@ -16,7 +17,7 @@ class BeritaScreen extends StatefulWidget {
 class _BeritaScreenState extends State<BeritaScreen> {
   bool? loading;
   List<Articles>? responseBerita = [];
-  Articles? articles;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -33,22 +34,22 @@ class _BeritaScreenState extends State<BeritaScreen> {
       body: ListView.builder(
           itemCount: responseBerita!.length,
           itemBuilder: (context, index) {
-            articles = responseBerita?[index];
+            Articles? articles = responseBerita?[index];
             // print("tes" + articles!.title!);
-            return GestureDetector(
-              onTap: () {
-                // Navigator.push(
-                //     context,
-                //     MaterialPageRoute(
-                //         builder: (context) => DetailWisataScreen(
-                //               detailWisata: wisata,
-                //             )));
-              },
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  children: [
-                    Card(
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => DetailBeritaScreen(
+                                    articles: articles,
+                                  )));
+                    },
+                    child: Card(
                       elevation: 7,
                       shadowColor: Colors.blue,
                       shape: RoundedRectangleBorder(
@@ -77,6 +78,7 @@ class _BeritaScreenState extends State<BeritaScreen> {
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 20,
+                                  fontFamily: "Cocola",
                                   fontWeight: FontWeight.bold),
                             ),
                           ),
@@ -134,11 +136,11 @@ class _BeritaScreenState extends State<BeritaScreen> {
                       //   ],
                       // ),
                     ),
-                    // Divider(
-                    //   color: Colors.black,
-                    // )
-                  ],
-                ),
+                  ),
+                  // Divider(
+                  //   color: Colors.black,
+                  // )
+                ],
               ),
             );
           }),
